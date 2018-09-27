@@ -70,5 +70,9 @@ export default class Page {
         this.logoutButton = Selector('#content').find('i').withText('Logout');
         this.flash = Selector('#flash');
         this.flashClose = Selector('#flash').find('a');
+
+        this.hovers = Selector('#content').find('a').withText('Hovers');
+        this.pic = Selector('#content > div > div:nth-child(3)');
+        this.picHover = Selector('#content > div > div:nth-child(3) > div');
     }
 }

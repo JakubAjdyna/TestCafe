@@ -144,3 +144,11 @@ test("Form Authentication", async (t) => {
         .click(page.logoutButton)
         .expect(page.flash.innerText).contains('You logged out of the secure area!');
 });
+
+test("Hovers", async (t) => {
+    await t
+        .click(page.hovers)
+        .expect(page.picHover.getStyleProperty('display')).eql('none')
+        .hover(page.pic)
+        .expect(page.picHover.getStyleProperty('display')).eql('block');
+});
