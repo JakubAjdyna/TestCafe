@@ -155,9 +155,60 @@ test("Hovers", async (t) => {
 
 test("Infinite Scroll", async (t) => {
     await t
-        .maximizeWindow()
         .click(page.infiniteScroll);
         for (var i = 0; i < 10; i++){
-            await t.hover(page.scrollElements.nth(i), {offsetX: -1, offsetY: -1})};
+           await t.hover(page.scrollElements.nth(i), {timeout: 100})};
+});
+
+test("JQuery UI Menus", async (t) => {
+    await t
+    //clicking enabled
+        .click(page.jQueryUiMenus)
+        .hover(page.jqMenuEnabled)
+        .hover(page.jqMenuDownloads)
+        .click(page.jqMenuDownloadsPDF)
+        .click(page.jqMenuDownloadsExcel)
+        .click(page.jqMenuDownloadsCSV)
+        .click(page.jqMenuBackToJQueryUI)
+        .expect(page.jqTitle.innerText).eql('JQuery UI')
+        .click(page.jqBackToMenu)
+    //clicking disabled
+        .click(page.jqMenuDisabled)
+        .click(page.jqMenuShouldNotSeeThis);
+});
+
+test("JavaScript Alerts", async (t) => {
+    await t
+        .setNativeDialogHandler((type) => {
+            switch (type) {
+                case 'alert':
+                    return;
+                case 'confirm':
+                    return true;
+                case 'prompt':
+                    return 'Test';}})
+        .click(page.javascriptAlerts)
+        .click(page.jsAlert)
+        .expect(page.jsResult.innerText).eql('You successfuly clicked an alert')
+        .click(page.jsConfirm)
+        .expect(page.jsResult.innerText).eql('You clicked: Ok')
+        .click(page.jsPrompt)
+        .expect(page.jsResult.innerText).eql('You entered: Test');
+
+});
+
+test("JavaScript onload event error", async (t) => {
+    await t
+        .click(page.javascriptOnLoadEventError);
+});
+
+test("Key Presses", async (t) => {
+    await t
+        .click(page.keyPresses);
+        for (var i = 0; i < 10; i++){
+        await t
+            .pressKey(i.toString())
+            .expect(page.keyPressResult.innerText).contains(i);
+        }
 });
 

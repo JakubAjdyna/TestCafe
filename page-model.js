@@ -78,5 +78,28 @@ export default class Page {
         this.infiniteScroll = Selector('#content').find('a').withText('Infinite Scroll');
         this.scrollInner = Selector('#content > div > div > div > div');
         this.scrollElements = Selector('#content > div > div > div > div > div');
+
+        this.jQueryUiMenus = Selector('#content').find('a').withText('JQuery UI Menus');
+        this.jqMenuDisabled = Selector('#ui-id-1');
+        this.jqMenuShouldNotSeeThis = Selector('#ui-id-3');
+        this.jqMenuEnabled = Selector('#ui-id-2');
+        this.jqMenuDownloads = Selector('#ui-id-4');
+        this.jqMenuBackToJQueryUI = Selector('#ui-id-5');
+        this.jqMenuDownloadsPDF = Selector('#ui-id-6');
+        this.jqMenuDownloadsCSV = Selector('#ui-id-7');
+        this.jqMenuDownloadsExcel = Selector('#ui-id-8');
+        this.jqTitle = Selector('#content > div > h3');
+        this.jqBackToMenu = Selector('#content').find('a').withText('Menu');
+
+        this.javascriptAlerts = Selector('#content').find('a').withText('JavaScript Alerts');
+        this.jsAlert = Selector('#content > div > ul > li:nth-child(1) > button');
+        this.jsConfirm = Selector('#content > div > ul > li:nth-child(2) > button');
+        this.jsPrompt = Selector('#content > div > ul > li:nth-child(3) > button');
+        this.jsResult = Selector('#result');
+
+        this.javascriptOnLoadEventError = Selector('#content').find('a').withText('JavaScript onload event error');
+
+        this.keyPresses = Selector('#content').find('a').withText('Key Presses');
+        this.keyPressResult = Selector('#result');
     }
 }
