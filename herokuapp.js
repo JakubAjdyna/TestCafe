@@ -152,3 +152,12 @@ test("Hovers", async (t) => {
         .hover(page.pic)
         .expect(page.picHover.getStyleProperty('display')).eql('block');
 });
+
+test("Infinite Scroll", async (t) => {
+    await t
+        .maximizeWindow()
+        .click(page.infiniteScroll);
+        for (var i = 0; i < 10; i++){
+            await t.hover(page.scrollElements.nth(i), {offsetX: -1, offsetY: -1})};
+});
+

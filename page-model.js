@@ -74,5 +74,9 @@ export default class Page {
         this.hovers = Selector('#content').find('a').withText('Hovers');
         this.pic = Selector('#content > div > div:nth-child(3)');
         this.picHover = Selector('#content > div > div:nth-child(3) > div');
+
+        this.infiniteScroll = Selector('#content').find('a').withText('Infinite Scroll');
+        this.scrollInner = Selector('#content > div > div > div > div');
+        this.scrollElements = Selector('#content > div > div > div > div > div');
     }
 }
