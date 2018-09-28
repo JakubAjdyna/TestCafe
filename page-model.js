@@ -101,5 +101,9 @@ export default class Page {
 
         this.keyPresses = Selector('#content').find('a').withText('Key Presses');
         this.keyPressResult = Selector('#result');
+
+        this.multipleWindows = Selector('#content').find('a').withText('Multiple Windows');
+        this.openNewWindow = Selector('#content').find('a').withText('Click Here');
+        this.newWindowContent = Selector('body');
     }
 }

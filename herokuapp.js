@@ -167,14 +167,14 @@ test("JQuery UI Menus", async (t) => {
         .hover(page.jqMenuEnabled)
         .hover(page.jqMenuDownloads)
         .click(page.jqMenuDownloadsPDF)
-        .click(page.jqMenuDownloadsExcel)
         .click(page.jqMenuDownloadsCSV)
+        .click(page.jqMenuDownloadsExcel)
         .click(page.jqMenuBackToJQueryUI)
         .expect(page.jqTitle.innerText).eql('JQuery UI')
         .click(page.jqBackToMenu)
-    //clicking disabled
-        .click(page.jqMenuDisabled)
-        .click(page.jqMenuShouldNotSeeThis);
+    //checking disabled
+        .hover(page.jqMenuDisabled)
+        .expect(page.jqMenuShouldNotSeeThis.visible).notOk();
 });
 
 test("JavaScript Alerts", async (t) => {
@@ -213,3 +213,9 @@ test("Key Presses", async (t) => {
         }
 });
 
+test("Multiple Windows", async (t) => {
+    await t
+        .click(page.multipleWindows)
+        .click(page.openNewWindow)
+        .expect(page.newWindowContent.innerText).contains('New Window');
+});
