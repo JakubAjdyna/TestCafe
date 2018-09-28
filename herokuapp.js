@@ -200,6 +200,7 @@ test("JavaScript Alerts", async (t) => {
 test("JavaScript onload event error", async (t) => {
     await t
         .click(page.javascriptOnLoadEventError);
+        //TestCafe automatically fails the test, if console.error is found
 });
 
 test("Key Presses", async (t) => {
