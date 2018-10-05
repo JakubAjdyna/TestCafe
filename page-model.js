@@ -65,7 +65,7 @@ export default class Page {
 
         this.formAuthentication = Selector('#content').find('a').withText('Form Authentication');
         this.username = Selector('#username');
-        this.password = Selector('#password')
+        this.password = Selector('#password');
         this.loginButton = Selector('#login').find('button').withText('Login');
         this.logoutButton = Selector('#content').find('i').withText('Logout');
         this.flash = Selector('#flash');
@@ -105,5 +105,8 @@ export default class Page {
         this.multipleWindows = Selector('#content').find('a').withText('Multiple Windows');
         this.openNewWindow = Selector('#content').find('a').withText('Click Here');
         this.newWindowContent = Selector('body');
+
+        this.notificationMessages = Selector('#content').find('a').withText('Notification Messages');
+        this.newMessage = Selector('#content').find('a').withText('Click here');
     }
 }

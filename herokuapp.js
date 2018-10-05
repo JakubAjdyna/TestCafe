@@ -206,10 +206,12 @@ test("JavaScript onload event error", async (t) => {
 test("Key Presses", async (t) => {
     await t
         .click(page.keyPresses);
-        for (var i = 0; i < 10; i++){
-        await t
-            .pressKey(i.toString())
-            .expect(page.keyPressResult.innerText).contains(i);
+        for (var i = 0; i < 30; i++){
+            var randomChar = Math.random().toString(36).substring(2,3)
+            .toUpperCase(randomChar);
+            await t
+                .pressKey(randomChar)
+                .expect(page.keyPressResult.innerText).contains(randomChar);
         }
 });
 
@@ -218,4 +220,14 @@ test("Multiple Windows", async (t) => {
         .click(page.multipleWindows)
         .click(page.openNewWindow)
         .expect(page.newWindowContent.innerText).contains('New Window');
+});
+
+test("Notification Messages", async (t) => {
+    await t
+        .click(page.notificationMessages);
+        for (var i = 0; i < 10; i++){
+            await t
+                .click(page.newMessage)
+                .expect(page.flash.innerText).contains('Action');
+            }
 });
