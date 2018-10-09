@@ -47,7 +47,7 @@ export default class Page {
         this.modalClose = this.modal.find('p').withText('Close');
 
         this.fileDownloader = Selector('#content').find('a').withText('File Download');
-        this.emptyTxt = Selector('#content > div > a:nth-child(8)');
+        this.emptyTxt = Selector('#content').find('a').withText('empty.txt')
 
         this.fileUploader = Selector('#content').find('a').withText('File Upload');
         this.chooseFiles = Selector('#file-upload');
@@ -108,5 +108,10 @@ export default class Page {
 
         this.notificationMessages = Selector('#content').find('a').withText('Notification Messages');
         this.newMessage = Selector('#content').find('a').withText('Click here');
+
+        this.secureFileDownload = Selector('#content').find('a').withText('Secure File Download');
+
+        this.typos = Selector('#content').find('a').withText('Typos');
+        this.typosText = Selector('.example');
     }
 }

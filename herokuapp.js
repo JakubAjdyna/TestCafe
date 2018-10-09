@@ -1,3 +1,4 @@
+import { Selector, ClientFunction } from 'testcafe';
 import Page from './page-model';
 
 const page = new Page();
@@ -17,12 +18,40 @@ test('Basic auth', async t => {
         .expect(page.congrats.innerText).contains('Congratulations!');
 });
 
-test('Broken Images', async t => {
-    await t
-        .click(page.brokenImages)
-        .expect(page.image1.exists).ok()
-        .expect(page.image2.exists).ok()
-        .expect(page.image3.exists).ok();
+test('Broken images', async t => {
+    await t.click(page.brokenImages);
+    
+    var images        = Selector('img');
+    var count         = await images.count;
+    var requestsCount = 0;
+    var statuses      = [];
+
+    var getRequestResult = ClientFunction(url => {
+        return new Promise(resolve => {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', url);
+            xhr.onload = function () {
+                resolve(xhr.status);
+            };
+            xhr.send(null);
+        });
+    });
+
+    for (var i = 0; i < count; i++) {
+        var url = await images.nth(i).getAttribute('src');
+
+        if (!url.startsWith('data')) {
+            requestsCount++;
+
+            statuses.push(await getRequestResult(url));
+        }
+    }
+
+    await t.expect(requestsCount).eql(statuses.length);
+
+    for (const status of statuses)
+        await t.expect(status).eql(200);
 });
 
 test('Checkboxes', async t => {
@@ -86,8 +115,7 @@ test('Dynamic Loading example 2', async t => {
 });
 
 test('Exit Intent', async t => {
-    await t
-        .click(page.exitIntent);
+    await t.click(page.exitIntent);
     const fireAction = await t.eval(() => _ouibounce.fire());  
     await t
         .expect(page.modal.visible).ok()
@@ -224,10 +252,20 @@ test("Multiple Windows", async (t) => {
 
 test("Notification Messages", async (t) => {
     await t
-        .click(page.notificationMessages);
-        for (var i = 0; i < 10; i++){
-            await t
-                .click(page.newMessage)
-                .expect(page.flash.innerText).contains('Action');
-            }
+        .click(page.notificationMessages)
+        .click(page.newMessage)
+        .expect(page.flash.innerText).contains('Action successful','Action was unsuccesful');
+
+});
+
+test("Secure File Download", async (t) => {
+    await t
+        .click(page.secureFileDownload)
+        .click(page.emptyTxt);
+});
+
+test("Typos", async (t) => {
+    await t
+        .click(page.typos)
+        .expect(page.typosText.innerText).contains("Sometimes you'll see a typo, other times you won't.");
 });
